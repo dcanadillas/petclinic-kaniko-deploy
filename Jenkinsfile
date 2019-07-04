@@ -34,6 +34,8 @@ pipeline {
             steps {
                 error 'Fake error to force failure in Build'
                 container('kubectl') {
+                    //copyArtifacts projectName: '../petclinic-kaniko/master'
+                    gateConsumesArtifact id: 'kaniko'
                     //error 'Forcing error to check DevOptics'
                     echo 'Check Deployment and Service'
                     sh 'kubectl get deployments,svc -n staging'
