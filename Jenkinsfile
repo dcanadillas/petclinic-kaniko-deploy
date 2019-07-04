@@ -32,6 +32,7 @@ pipeline {
         }
         stage('Check') {
             steps {
+                error 'Fake error to force failure in Build'
                 container('kubectl') {
                     //error 'Forcing error to check DevOptics'
                     echo 'Check Deployment and Service'
