@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: petclinic
+  labels:
+    app: petclinic
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: petclinic
+  template:
+    metadata:
+      labels:
+        app: petclinic
+    spec:
+      containers:
+      - name: petclinic-test
+        image: eu.gcr.io/emea-sa-demo/petclinic-kaniko:latest
+        imagePullPolicy: Always
+        command:
+        ports:
+          - containerPort: 8080
+            protocol: TCP
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: petclinic-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: petclinic
+  ports:
+  - protocol: TCP
+    port: 9090
+    targetPort: 8080

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+    labels:
+        podname: testpod
+spec:
+    containers:
+    - name: kubectl
+      image: gcr.io/cloud-builders/kubectl
+      command:
+      - cat
+      tty: true
+    serviceAccount: jenkins
