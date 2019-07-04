@@ -33,6 +33,8 @@ pipeline {
         stage('Check') {
             steps {
                 container('kubectl') {
+                    copyArtifacts projectName: '../petclinic-kaniko/master'
+                    gateConsumesArtifact file: 'application.sh'
                     //error 'Forcing error to check DevOptics'
                     echo 'Check Deployment and Service'
                     sh 'kubectl get deployments,svc -n staging'
