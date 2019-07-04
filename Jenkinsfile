@@ -32,7 +32,7 @@ pipeline {
         }
         stage('Check') {
             steps {
-                error 'Fake error to force failure in Build'
+                //error 'Fake error to force failure in Build'
                 container('kubectl') {
                     //copyArtifacts projectName: '../petclinic-kaniko/master'
                     gateConsumesArtifact id: 'kaniko'
